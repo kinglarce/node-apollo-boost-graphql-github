@@ -1,4 +1,4 @@
-# React GraphQL Vanilla Github
+# Node.js using Apollo Boost for Github API
 
 A simple Node.js application for command line consuming the GitHub GraphQL API using Apollo Client with [Apollo Boost](https://github.com/apollographql/apollo-client/tree/master/packages/apollo-boost).
 
