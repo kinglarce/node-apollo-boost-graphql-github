@@ -1,4 +1,22 @@
 import 'dotenv/config';
+
+// There is this error.
+// `Invariant Violation: 
+// fetch is not found globally and no fetcher passed, to fix pass a fetch for
+// your environment like https://www.npmjs.com/package/node-fetch.`
+
+// The error occurs because the native fetch API, which is used to 
+// make requests to remote APIs on a promise basis, is only available in 
+// the browser. You can’t access it in a Node.js application that runs only 
+// in the command line. 
+
+// Apollo Client uses the fetch API to perform queries and mutations, usually 
+// from a browser environment and not Node.js environment. Query or Mutation can 
+// be performed with a simple HTTP request, so the Apollo Client uses the native 
+// fetch API from a browser to perform these requests. The solution is to use a node 
+// package which makes fetch available in a Node.js environment.
+
+// This `cross-fetch` will address this issue.
 import 'cross-fetch/polyfill';
 import ApolloClient from 'apollo-boost';
 import {
