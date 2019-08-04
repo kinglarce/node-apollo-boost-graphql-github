@@ -84,11 +84,30 @@ client
   // log error when there is no next page
   .catch(console.log);
 
+console.log('addStar Request');
 client
   .mutate({
     mutation: ADD_STAR,
     variables: {
-      repositoryId: 'MDEwOlJlcG9zaXRvcnk2MzM1MjkwNw==',
+      repositoryId: 'MDEwOlJlcG9zaXRvcnkxNzcwNDc3NzA=',
     },
   })
-  .then(console.log);
+  .then(res => {
+    console.log('Added Star : ', res.data.addStar.starrable);
+    return res.data.addStar.starrable;
+  })
+  .then(({ id, viewerHasStarred }) => {
+    console.log('removeStar Request');
+    if(!viewerHasStarred)
+      console.log('Cannot remove havent starred Repo');
+    return client
+      .mutate({
+        mutation: REMOVE_STAR,
+        variables: {
+          repositoryId: id,
+        },
+      })
+  })
+  .then(res => {
+    console.log('Removed Star : ', res.data.removeStar.starrable);
+  });
